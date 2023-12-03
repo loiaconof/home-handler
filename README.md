@@ -18,7 +18,15 @@ docker-compose run --rm composer install
 docker-compose up -d server
 ```
 
-### Run dev
+### Developer
+
+Run
 ```
 docker-compose up -d --build server
+```
+
+Launch symfony cli
+```
+docker-compose run --rm symfony-console -- arg1 arg2 ... argn
+[example] docker-compose run --rm symfony-console -- cache:clear
 ```

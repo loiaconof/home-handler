@@ -34,4 +34,14 @@ services:
     volumes:
       - ./symfony:/var/www/html
 
+  symfony-console:
+    build:
+      context: ./dockerfiles
+      dockerfile: symfony-console.dockerfile
+    volumes:
+      - ./symfony:/var/www/html
+    entrypoint:
+      - /bin/sh
+      - -c
+      - 'php bin/console "$@"'
 #  npm:
