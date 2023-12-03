@@ -2,8 +2,7 @@ FROM php:8.3-fpm-alpine3.18
 
 WORKDIR  /var/www/html
 
-COPY src .
-
+#COPY symfony .
 
 RUN docker-php-ext-install pdo pdo_mysql
 
