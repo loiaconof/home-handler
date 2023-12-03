@@ -1,6 +1,24 @@
 # home-handler
 
-run composer
+## Getting Started
+
+### Prerequisites
+
+- docker https://docs.docker.com/engine/install/
+
+### Installation
+
+run composer install
 ```
-docker-compose run --rm composer create-project symfony/skeleton:"7.0.*@dev" symfony
+docker-compose run --rm composer install
+```
+
+### Run
+```
+docker-compose up -d server
+```
+
+### Run dev
+```
+docker-compose up -d --build server
 ```
