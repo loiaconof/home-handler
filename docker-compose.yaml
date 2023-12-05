@@ -34,9 +34,9 @@ services:
     ports:
       - '8001:8001'
     volumes:
-      - ./vue:/home/node/app
+      - ./nuxt:/home/node/app
     tty: true
-    command: npm run dev
+    command: ["npm", "run", "dev"]
 
   composer:
     build:
