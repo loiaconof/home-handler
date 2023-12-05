@@ -48,11 +48,8 @@ services:
   symfony-console:
     build:
       context: ./dockerfiles
-      dockerfile: symfony-console.dockerfile
+      dockerfile: php.dockerfile
     volumes:
       - ./symfony:/var/www/html
-    entrypoint:
-      - /bin/sh
-      - -c
-      - 'php bin/console "$@"'
+    entrypoint: ["php", "/var/www/html/bin/console"]
 #  npm:
