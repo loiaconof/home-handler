@@ -1,12 +1,7 @@
 <script setup lang="ts">
-const route = useRoute()
+const { data: count } = await useFetch('http://localhost:8000/default')
 </script>
 
 <template>
-  <div>
-    <h1>Nuxt Routing set up successfully!</h1>
-    <p>Current route: {{ route.path }}</p>
-    <a href="https://nuxt.com/docs/getting-started/routing" target="_blank">Learn more about Nuxt Routing</a>
-    <NuxtLink to="/cars/5">cars</NuxtLink>
-  </div>
+  {{count}}
 </template>
