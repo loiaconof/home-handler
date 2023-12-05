@@ -12,6 +12,7 @@ services:
     depends_on:
       - php
       - db
+      - node
 
   php:
     build:
@@ -26,6 +27,15 @@ services:
     image: 'postgres:15.5-alpine3.18'
     env_file:
       - ./env/postgres.env
+
+  node:
+    image: 'node:21-alpine3.17'
+    working_dir: /home/node/app
+    ports:
+      - '8001:8001'
+    volumes:
+      - ./vue:/home/node/app
+    tty: true
 
   composer:
     build:
