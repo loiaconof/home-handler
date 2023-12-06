@@ -12,5 +12,6 @@ export default defineNuxtConfig({
         interval: 1000,
       }
     }
-  }
+  },
+  modules: ['@nuxt/ui']
 })

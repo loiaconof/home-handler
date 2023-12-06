@@ -3,5 +3,10 @@ const { data: count } = await useFetch('http://localhost:8000/default')
 </script>
 
 <template>
-  {{count}}
+  <div>
+    {{count}}
+  </div>
+  <div>
+    <UButton icon="i-heroicons-magnifying-glass" />
+  </div>
 </template>
