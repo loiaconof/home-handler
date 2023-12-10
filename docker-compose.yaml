@@ -34,14 +34,14 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   node:
-    image: 'node:21-alpine3.17'
-    working_dir: /home/node/app
+    build:
+      context: ./dockerfiles
+      dockerfile: node.dockerfile
     ports:
       - '8001:8001'
+      - '24678:24678'
     volumes:
       - ./nuxt:/home/node/app
-    tty: true
-    command: ["npm", "run", "dev"]
 
   composer:
     build:
