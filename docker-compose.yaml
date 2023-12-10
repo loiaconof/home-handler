@@ -25,8 +25,13 @@ services:
 
   db:
     image: 'postgres:15.5-alpine3.18'
+    restart: always
     env_file:
       - ./env/postgres.env
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   node:
     image: 'node:21-alpine3.17'
@@ -53,3 +58,6 @@ services:
       - ./symfony:/var/www/html
     entrypoint: ["php", "/var/www/html/bin/console"]
 #  npm:
+
+volumes:
+  postgres_data:
