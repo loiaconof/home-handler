@@ -1,0 +1,76 @@
+services:
+  nuxt:
+    image: 'node:21-alpine3.18'
+    working_dir: /app
+    ports:
+      - 3000:3000
+      - 24678:24678
+    networks:
+      - webapp
+    volumes:
+      - ./nuxt:/app
+    command: npm run dev -- -o
+
+  symfony:
+    image: php:8.3.7RC1-zts-alpine3.19
+    working_dir: /app
+    ports:
+      - 8000:8000
+    networks:
+      - webapp
+    volumes:
+      - ./symfony:/app
+    command: >
+      sh -c "apk add --no-cache bash &&
+             curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | bash &&
+             apk add symfony-cli &&
+             apk add --no-cache postgresql-dev &&
+             docker-php-ext-install pdo pdo_pgsql &&
+             symfony server:start"
+    depends_on:
+      - composer
+      - postgres
+  
+  composer:
+    image: composer:2.7.4
+    working_dir: /app
+    volumes:
+      - ./symfony:/app
+    command: >
+      sh -c "composer install &&
+             tail -F anything"
+    
+  postgres:
+    image: 'postgres:15.5-alpine3.18'
+    restart: always
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=!ChangeMe!
+    ports:
+      - '5432:5432'
+    networks:
+      - webapp
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pg-admin:
+    image: dpage/pgadmin4:8.5
+    restart: unless-stopped
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@email.com
+      - PGADMIN_DEFAULT_PASSWORD=adminpassword
+    ports:
+      - "8888:80"
+    networks:
+      - webapp
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+networks:
+  webapp:
+    driver: bridge
+    
+volumes:
+  postgres_data:
+  pgadmin_data:
