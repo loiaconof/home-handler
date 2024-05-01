@@ -26,6 +26,7 @@ services:
              apk add symfony-cli &&
              apk add --no-cache postgresql-dev &&
              docker-php-ext-install pdo pdo_pgsql &&
+             symfony console doctrine:migrations:migrate --no-interaction &&
              symfony server:start"
     depends_on:
       - composer
