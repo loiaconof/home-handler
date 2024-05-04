@@ -9,7 +9,9 @@ services:
       - webapp
     volumes:
       - ./nuxt:/app
-    command: npm run dev -- -o
+    command: >
+      sh -c "npm i &&
+             npm run dev -- -o"
 
   symfony:
     image: php:8.3.7RC1-zts-alpine3.19
