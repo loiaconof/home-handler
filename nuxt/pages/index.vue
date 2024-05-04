@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const route = useRoute()
-const { data } = await useFetch('/test', { baseURL: 'http://localhost:8000'})
+const { data } = await useFetch('/incomes', { baseURL: 'http://localhost:8000'})
 </script>
 
 <template>
